@@ -14,7 +14,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Login to AWS ECR
+      # Configure AWS credentials and set the region
+      - name: Configure AWS Credentials
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          echo "Configuring AWS Region to $AWS_REGION"
+          aws configure set region $AWS_REGION
+
+      # Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
