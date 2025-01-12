@@ -14,25 +14,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Configure AWS credentials and set the region
+      # Configure AWS credentials
       - name: Configure AWS Credentials
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: |
-          echo "Configuring AWS Region to $AWS_REGION"
-          aws configure set region $AWS_REGION
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       # Login to Amazon ECR
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
-      # - name: Login to AWS ECR
-      #   if: success()
-      #   run: |
-      #     aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 051826734860.dkr.ecr.ap-southeast-2.amazonaws.com
 
       # Build Docker image
       - name: Build Docker Image
