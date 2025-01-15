@@ -18,7 +18,7 @@ spec:
       - name: flask-app
         image: 020866158197.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 5001
         resources:
           requests:
             memory: "256Mi"
@@ -40,3 +40,6 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 5000
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001
