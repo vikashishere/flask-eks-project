@@ -39,9 +39,9 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 80
+      port: 5000
       targetPort: 5000
-    - name: metrics
-      protocol: TCP
-      port: 5001
-      targetPort: 5001
+    # - name: metrics
+    #   protocol: TCP
+    #   port: 5001
+    #   targetPort: 5001
